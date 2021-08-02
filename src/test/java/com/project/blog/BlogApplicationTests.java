@@ -1,18 +1,16 @@
 package com.project.blog;
 
+import com.project.blog.domain.comment.CommentEntity;
+import com.project.blog.domain.comment.CommentRepository;
+import com.project.blog.domain.post.PostEntity;
+import com.project.blog.domain.post.PostRepository;
 import com.project.blog.domain.user.UserEntity;
 import com.project.blog.domain.user.UserRepository;
-import org.apache.catalina.User;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -21,6 +19,10 @@ class BlogApplicationTests {
 
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private PostRepository postRepository;
+	@Autowired
+	private CommentRepository commentRepository;
 
 	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://localhost:3306/blog?serverTimezone=UTC&characterEncoding=UTF-8";
@@ -36,10 +38,25 @@ class BlogApplicationTests {
 			e.printStackTrace();
 		}
 	}
+
 	@Test
 	public void userTest() throws Exception {
-		// 팀1 저장
+		// user 생성
 		UserEntity user = new UserEntity("test", "pass");
 		userRepository.save(user);
+	}
+
+	@Test
+	public void postTest() throws Exception {
+		// post 생성
+		PostEntity post = new PostEntity("test","test","testPost");
+		postRepository.save(post);
+	}
+
+	@Test
+	public void commentTest() throws Exception{
+		// comment 생성
+		CommentEntity comment = new CommentEntity("test",1,"testComment");
+		commentRepository.save(comment);
 	}
 }

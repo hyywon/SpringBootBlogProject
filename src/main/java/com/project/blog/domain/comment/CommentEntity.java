@@ -3,34 +3,37 @@ package com.project.blog.domain.comment;
 import com.project.blog.domain.post.PostEntity;
 import com.project.blog.domain.user.UserEntity;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Table(name = "COMMENT")
 @NoArgsConstructor
 public class CommentEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "text")
     private String text;
 
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private PostEntity post;
+    @Column(name = "post_id")
+    private Integer post_id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
-
-    public String getText() {
-        return text;
-    }
+    @Column(name = "writer")
+    private String writer;
 
     public void setText(String text) {
+        this.text = text;
+    }
+
+    @Builder
+    public CommentEntity(String writer, Integer post_id, String text){
+        this.writer = writer;
+        this.post_id = post_id;
         this.text = text;
     }
 }
