@@ -30,18 +30,10 @@ public class UserEntity {
         this.name = name;
     }
 
-    public void setPassword(@Nullable String password) {
-        this.password = password;
-    }
-
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-//    @JsonIgnoreProperties({"user"})
-//    private List<PostEntity> postList;
 
     @Builder
     public UserEntity(String name, String password){
         this.name = name;
         this.password = password;
-
     }
 }

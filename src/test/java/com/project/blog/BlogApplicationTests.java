@@ -40,6 +40,7 @@ class BlogApplicationTests {
 	}
 
 	@Test
+	@Transactional
 	public void userTest() throws Exception {
 		// user 생성
 		UserEntity user = new UserEntity("test", "pass");
@@ -47,16 +48,18 @@ class BlogApplicationTests {
 	}
 
 	@Test
+	@Transactional
 	public void postTest() throws Exception {
 		// post 생성
-		PostEntity post = new PostEntity("test","test","testPost");
+		PostEntity post = new PostEntity("test","testPost");
 		postRepository.save(post);
 	}
 
 	@Test
+	@Transactional
 	public void commentTest() throws Exception{
 		// comment 생성
-		CommentEntity comment = new CommentEntity("test",1,"testComment");
+		CommentEntity comment = new CommentEntity("testComment");
 		commentRepository.save(comment);
 	}
 }

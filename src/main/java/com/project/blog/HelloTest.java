@@ -5,8 +5,4 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloTest {
-    @RequestMapping("/")
-    public String index() {
-        return "helloworld!";
-    }
 }
