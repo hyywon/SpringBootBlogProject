@@ -2,8 +2,10 @@ package com.project.blog.controller;
 
 import com.project.blog.domain.user.UserEntity;
 import com.project.blog.domain.user.UserRepository;
+import com.project.blog.dto.ResponseDto;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,14 +20,20 @@ public class UserController {
 
     // http://localhost:8000/user/join (요청)
     // BODY 에 name, password 입력
+//    @PostMapping("/user/join")
+//    public String join(UserEntity user){
+//        System.out.println("USER name " + user.getName());
+//        System.out.println("USER password " + user.getPassword());
+//
+//        userRepository.save(user);
+//
+//        return "Join Success";
+//    }
+
     @PostMapping("/user/join")
-    public String join(UserEntity user){
-        System.out.println("USER name " + user.getName());
-        System.out.println("USER password " + user.getPassword());
-
-        userRepository.save(user);
-
-        return "Join Success";
+    public ResponseDto<Integer> join(@RequestBody UserEntity user){
+        System.out.println("User API 호출");
+        return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 
     // http://localhost:8000/user/detail/{id} (요청)
