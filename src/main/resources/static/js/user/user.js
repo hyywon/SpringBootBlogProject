@@ -45,7 +45,7 @@ let index = {
         $.ajax({
             // 회원가입 수행 요청
             type:"POST",
-            url:"/user/signin",
+            url:"/user/login",
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             // dataType: "json"

@@ -22,9 +22,6 @@ public class UserController {
     @Autowired // DI
     private UserService userService;
 
-    @Autowired
-    private HttpSession session;
-
     @PostMapping("/user/join")
     public ResponseDto<Integer> join(@RequestBody UserEntity user){ //name, password
         System.out.println(user.getName() + user.getPassword());
@@ -33,8 +30,8 @@ public class UserController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(),result);
     }
 
-    @PostMapping("/user/signin")
-    public ResponseDto<Integer> signin(@RequestBody UserEntity user){
+    @PostMapping("/user/login")
+    public ResponseDto<Integer> signin(@RequestBody UserEntity user, HttpSession session){
         System.out.println(user.getName() + user.getPassword());
         System.out.println("User SignIn API 호출");
         UserEntity principal = userService.로그인(user); // 접근 주체 객체 생성
