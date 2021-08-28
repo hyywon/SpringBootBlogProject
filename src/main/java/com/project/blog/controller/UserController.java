@@ -25,18 +25,6 @@ public class UserController {
     @Autowired
     private HttpSession session;
 
-    // http://localhost:8000/user/join (요청)
-    // BODY 에 name, password 입력
-//    @PostMapping("/user/join")
-//    public String join(UserEntity user){
-//        System.out.println("USER name " + user.getName());
-//        System.out.println("USER password " + user.getPassword());
-//
-//        userRepository.save(user);
-//
-//        return "Join Success";
-//    }
-
     @PostMapping("/user/join")
     public ResponseDto<Integer> join(@RequestBody UserEntity user){ //name, password
         System.out.println(user.getName() + user.getPassword());
@@ -53,8 +41,8 @@ public class UserController {
 
         if (principal != null){
             session.setAttribute("principal", principal);
+            session.setAttribute("SID", principal.getId());
         }
-
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 
