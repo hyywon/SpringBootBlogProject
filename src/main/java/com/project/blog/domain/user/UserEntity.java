@@ -21,14 +21,14 @@ public class UserEntity {
     @Column(name = "user_id")
     private Integer id;
 
-    @Column(name = "name")
-    String name;
+    @Column(name = "username")
+    String username;
 
     @Column(name = "password")
     String password;
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
     public void setPassword(String password) {
         this.password = password;
@@ -36,8 +36,8 @@ public class UserEntity {
 
 
     @Builder
-    public UserEntity(String name, String password){
-        this.name = name;
+    public UserEntity(String username, String password){
+        this.username = username;
         this.password = password;
     }
 }

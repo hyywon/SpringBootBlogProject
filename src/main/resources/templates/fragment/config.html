@@ -1,16 +1,21 @@
-<html lang="kr" xmlns:th="http://www.thymeleaf.org"
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-  <head th:fragment="configFragment">
+
+  <th:block th:fragment="configFragment">
     <meta charset="UTF-8" />
     <!-- 공통 css -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet"/>
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="/css/index.css"/>
+    <!-- Content Page의 CSS fragment 삽입 -->
+    <th:block layout:fragment="css"></th:block>
 
-    <!-- JS Plugins -->
+    <!-- Content Page의 script fragment 삽입 -->
+    <th:block layout:fragment="script"></th:block>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-  </head>
+  </th:block>
 </html>

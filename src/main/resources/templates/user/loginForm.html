@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="kr">
+    <head>
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/css/signin.css" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <style>
+
+            @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                    font-size: 3.5rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+    <main class="form-signin">
+        <!--  Spring Security 가 로그인을 가로 채서 대신 로그인 하도록 함-->
+        <form action="/auth/loginProc" method="post">
+            <h1 class="h3 mb-3 fw-normal">Please Sign in</h1>
+
+            <div class="form-floating">
+                <input type="text" name="username" class="form-control" id="username" placeholder="Name">
+                <label for="username">UserName</label>
+            </div>
+
+            <div class="form-floating">
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                <label for="password">Password</label>
+            </div>
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="remember" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button id="btn-login" class="w-100 btn btn-lg btn-primary">로그인</button>
+        </form>
+        <p class="mt-5 mb-3 text-muted">&copy; Ylog</p>
+    </main>
+    </body>
+</html>

@@ -5,6 +5,7 @@ import com.project.blog.domain.user.UserRepository;
 import com.project.blog.dto.ResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,24 +20,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
     @Transactional
-    public int 회원가입(UserEntity user) {
+    public void 회원가입(UserEntity user) {
 
-        try {
-            userRepository.save(user);
-            return 1;
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("User Service 회원가입 " + e.getMessage());
-        }
-        return -1;
-    }
+        String rawPassword = user.getPassword(); // 원본 비밀번호
+        String encPassword = encoder.encode(rawPassword); // 해쉬 비밀번호
 
-    @Transactional(readOnly = true)
-    //readonly = true : select할 떄, transaction 시작, 서비스 종료시에 transaction 종료 (정합성, 같은 데이터 select 할 수 있도록)
-    public UserEntity 로그인(UserEntity user) {
-        return userRepository.findByNameAndPassword(user.getName(), user.getPassword());
+        user.setPassword(encPassword);
 
-
+        userRepository.save(user);
     }
 }

@@ -6,6 +6,7 @@ import com.project.blog.dto.ResponseDto;
 import com.project.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,24 +23,12 @@ public class UserController {
     @Autowired // DI
     private UserService userService;
 
-    @PostMapping("/user/join")
+    @PostMapping("/auth/joinProc")
     public ResponseDto<Integer> join(@RequestBody UserEntity user){ //name, password
-        System.out.println(user.getName() + user.getPassword());
+        System.out.println(user.getUsername() + user.getPassword());
         System.out.println("User API 호출");
-        int result = userService.회원가입(user);
-        return new ResponseDto<Integer>(HttpStatus.OK.value(),result);
-    }
-
-    @PostMapping("/user/login")
-    public ResponseDto<Integer> signin(@RequestBody UserEntity user, HttpSession session){
-        System.out.println(user.getName() + user.getPassword());
-        System.out.println("User SignIn API 호출");
-        UserEntity principal = userService.로그인(user); // 접근 주체 객체 생성
-
-        if (principal != null){
-            session.setAttribute("principal", principal);
-            session.setAttribute("SID", principal.getId());
-        }
+        userService.회원가입(user);
+        System.out.println(user.getPassword());
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 
@@ -51,7 +40,7 @@ public class UserController {
 
         // Optional 값이기 때문에 ifPresent 를 통해서 먼저 확인
         user.ifPresent(selectUser -> {
-                    System.out.println("username" + selectUser.getName());
+                    System.out.println("username" + selectUser.getUsername());
                     System.out.println("password" + selectUser.getPassword());
                 }
         );
@@ -75,7 +64,7 @@ public class UserController {
             return new IllegalArgumentException("수정 실패");
         });
 
-        user.setName(requestUser.getName());
+        user.setUsername(requestUser.getUsername());
         user.setPassword(requestUser.getPassword());
 
         return null;
