@@ -10,10 +10,12 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Entity
-@Getter
+@Data
 @Table(name = "POST")
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
 public class PostEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +34,12 @@ public class PostEntity{
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "post")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "post") // 연관관계의 주인 X
     private List<CommentEntity> comment;
 
     @CreationTimestamp //시간 자동 입력
     private Timestamp create_date;
+
+
 
 }

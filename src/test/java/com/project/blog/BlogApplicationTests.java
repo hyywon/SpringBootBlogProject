@@ -49,14 +49,6 @@ class BlogApplicationTests {
 
 	@Test
 	@Transactional
-	public void postTest() throws Exception {
-		// post 생성
-		PostEntity post = new PostEntity("test","testPost");
-		postRepository.save(post);
-	}
-
-	@Test
-	@Transactional
 	public void commentTest() throws Exception{
 		// comment 생성
 		CommentEntity comment = new CommentEntity("testComment");
