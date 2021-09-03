@@ -5,21 +5,27 @@
     <head>
         <th:block layout:fragment="css"/>
         <th:block layout:fragment="script"/>
-        <link href="/css/index.css" rel="stylesheet" />
+        <link href="/css/index.css" rel="stylesheet"/>
     </head>
 <div layout:fragment="content">
     <main class="container">
         <div class="row mb-2">
-            <div class="col-md-6">
-                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
+            <div th:each="post : ${posts.content}"class="col-md-6">
+                <div class="card m-2" style="flex-direction: inherit;">
+                    <div class="card-body" style="float:left;">
                         <strong class="d-inline-block mb-2 text-primary">World</strong>
-                        <h3 class="mb-0">Title</h3>
-                        <div class="mb-1 text-muted">Date</div>
+                        <h3 th:text="${post.title}" class="mb-0"/>
+                        <div th:text="${post.create_date}" class="mb-1 text-muted">
+                        </div>
+                        </br>
+                    <a href="#" class="btn btn-dark">상세보기</a>
                     </div>
-                    <div class="col-auto d-none d-lg-block">
-                        <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img"
-                             aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>
+
+                    <div class="col-auto d-lg-block" style="display: inline-block;">
+                        <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
+                             role="img"
+                             aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                             focusable="false"><title>
                             Placeholder</title>
                             <rect width="100%" height="100%" fill="#55595c"/>
                             <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
@@ -28,6 +34,10 @@
                 </div>
             </div>
         </div>
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" th:href="@{?page=__${posts.number-1}__}">Previous</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{?page=__${posts.number+1}__}">Next</a></li>
+        </ul>
     </main>
 </div>
 </html>
