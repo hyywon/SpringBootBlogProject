@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -27,9 +29,21 @@ public class PostService {
         postRepository.save(post);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Page<PostEntity> 게시글목록(Pageable pageable) {
         return postRepository.findAll(pageable);
     }
 
+    @Transactional(readOnly = true)
+    public PostEntity 상세보기(Integer id) {
+        // findById -> return entity
+        return postRepository.findById(id).orElseThrow(() -> {
+                    return new IllegalArgumentException("글 상세보기 실패");
+                });
+    }
+
+    @Transactional
+    public void 삭제하기(Integer id){
+        postRepository.deleteById(id);
+    }
 }

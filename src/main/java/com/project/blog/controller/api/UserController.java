@@ -1,4 +1,4 @@
-package com.project.blog.controller;
+package com.project.blog.controller.api;
 
 import com.project.blog.domain.user.UserEntity;
 import com.project.blog.domain.user.UserRepository;

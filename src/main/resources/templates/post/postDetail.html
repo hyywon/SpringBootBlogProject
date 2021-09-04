@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net/nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">
+<head>
+  <th:block layout:fragment="css"/>
+  <th:block layout:fragment="script"/>
+
+  <link href="/css/index.css" rel="stylesheet" />
+</head>
+<div layout:fragment="content">
+  <main class="container">
+    <div class="mb-4">
+      <div class="container mt-5 px-4 px-lg-5">
+        <div class="justify-content-center">
+          <div class="col-10 col-xl-7">
+            <h1 class="section-heading mb-4" th:text="${post.title}"></h1>
+            <b>글 번호 : </b><span id="boardId" th:text="${post.id}"></span>
+            <b>작성자 : </b><span id="users" th:text="${post.user.username}"></span>
+            <p th:utext="${post.content}"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="container mt-5 px-4 px-lg-5">
+        <div class="container-fluid">
+          <div class="my-4 row-fluid">
+            <a href="/" id="btn-back" class="btn pull-right btn-dark">돌아가기</a>
+            <button id="btn-update" class="btn pull-right btn-primary">수정</button>
+            <button id="btn-warning" class="btn pull-right btn-danger">삭제</button>
+          </div>
+          <script src="/js/post/post.js/"></script>
+        </div>
+      </div>
+  </main>
+</div>
+</html>

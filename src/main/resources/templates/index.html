@@ -18,7 +18,7 @@
                         <div th:text="${post.create_date}" class="mb-1 text-muted">
                         </div>
                         </br>
-                    <a href="#" class="btn btn-dark">상세보기</a>
+                    <a th:href="@{/post/__${post.id}__}" id="btn-detail" class="btn btn-dark">상세보기</a>
                     </div>
 
                     <div class="col-auto d-lg-block" style="display: inline-block;">
