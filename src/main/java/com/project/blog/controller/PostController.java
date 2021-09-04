@@ -10,11 +10,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 @Controller
 public class PostController {
@@ -41,8 +43,10 @@ public class PostController {
 
 
     @GetMapping("/post/{id}")
-    public String postDetail(Model model, @PathVariable Integer id){
+    public String postDetail(Model model, Principal principal, @PathVariable Integer id){
+        System.out.println(principal.getName());
         model.addAttribute("post", postService.상세보기(id));
+        model.addAttribute("principal", principal);
         return "post/postDetail";
     }
 

@@ -2,32 +2,19 @@ package com.project.blog.controller.api;
 
 import com.project.blog.config.auth.PrincipalDetail;
 import com.project.blog.domain.post.PostEntity;
-import com.project.blog.domain.post.PostRepository;
-import com.project.blog.domain.user.UserEntity;
 import com.project.blog.dto.ResponseDto;
 import com.project.blog.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class PostApiController {
 
     @Autowired
     private PostService postService;
-
-    @Autowired
-    private PostRepository postRepository;
 
 
     @PostMapping("/write")
@@ -44,12 +31,3 @@ public class PostApiController {
 
     }
 }
-
-//    @GetMapping("/dummy/paging")
-//    public Page<PostEntity> pages(@PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-//        Page<PostEntity> posts = postRepository.findAll(pageable);
-//
-//        List<PostEntity> postlist = posts.getContent();
-//
-//        return posts;
-//    }

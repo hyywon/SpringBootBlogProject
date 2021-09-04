@@ -13,7 +13,7 @@
     <div class="mb-4">
       <div class="container mt-5 px-4 px-lg-5">
         <div class="justify-content-center">
-          <div class="col-10 col-xl-7">
+          <div class="col-10">
             <h1 class="section-heading mb-4" th:text="${post.title}"></h1>
             <b>글 번호 : </b><span id="boardId" th:text="${post.id}"></span>
             <b>작성자 : </b><span id="users" th:text="${post.user.username}"></span>
@@ -26,8 +26,10 @@
         <div class="container-fluid">
           <div class="my-4 row-fluid">
             <a href="/" id="btn-back" class="btn pull-right btn-dark">돌아가기</a>
-            <button id="btn-update" class="btn pull-right btn-primary">수정</button>
-            <button id="btn-warning" class="btn pull-right btn-danger">삭제</button>
+            <span th:if="${post.user.username == principal.name}">
+              <button id="btn-update" class="btn pull-right btn-primary">수정</button>
+              <button id="btn-warning" class="btn pull-right btn-danger">삭제</button>
+            </span>
           </div>
           <script src="/js/post/post.js/"></script>
         </div>
