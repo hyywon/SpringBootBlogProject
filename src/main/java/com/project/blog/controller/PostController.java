@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -44,10 +45,14 @@ public class PostController {
 
     @GetMapping("/post/{id}")
     public String postDetail(Model model, Principal principal, @PathVariable Integer id){
-        System.out.println(principal.getName());
         model.addAttribute("post", postService.상세보기(id));
         model.addAttribute("principal", principal);
         return "post/postDetail";
     }
 
+    @GetMapping("/post/{id}/update")
+    public String postUpdate(@PathVariable Integer id, Model model){
+        model.addAttribute("post", postService.상세보기(id));
+        return "post/updateForm";
+    }
 }

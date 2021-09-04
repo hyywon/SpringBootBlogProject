@@ -24,10 +24,15 @@ public class PostApiController {
     }
 
     @DeleteMapping("/post/delete/{id}")
-    public ResponseDto<Integer> postDelete(@PathVariable String id){
-        int ids = Integer.parseInt(id);
-        postService.삭제하기(ids);
+    public ResponseDto<Integer> postDelete(@PathVariable Integer id){
+        postService.삭제하기(id);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 
     }
+
+    @PutMapping("/post/update/{id}")
+    public ResponseDto<Integer> postUpdate(@PathVariable Integer id ,@RequestBody PostEntity post){
+        postService.수정하기(post, id);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    };
 }

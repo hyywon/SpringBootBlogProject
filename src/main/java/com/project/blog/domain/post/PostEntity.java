@@ -40,6 +40,8 @@ public class PostEntity{
     @CreationTimestamp //시간 자동 입력
     private Timestamp create_date;
 
-
-
+    public void update(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
 }

@@ -46,4 +46,13 @@ public class PostService {
     public void 삭제하기(Integer id){
         postRepository.deleteById(id);
     }
+
+    @Transactional
+    public void 수정하기(PostEntity post, Integer id){
+        PostEntity selectPost = postRepository.findById(id).orElseThrow(() -> {
+            return new IllegalArgumentException("글 업데이트 실패");
+        });
+        selectPost.setTitle(post.getTitle());
+        selectPost.setContent(post.getContent());
+    }
 }
