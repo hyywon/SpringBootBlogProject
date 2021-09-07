@@ -80,5 +80,4 @@ let index = {
 
 }
 
-
 index.init();

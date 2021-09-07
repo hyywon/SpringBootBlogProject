@@ -1,25 +1,36 @@
 package com.project.blog.controller.api;
 
+import com.project.blog.config.auth.PrincipalDetail;
 import com.project.blog.domain.user.UserEntity;
 import com.project.blog.domain.user.UserRepository;
 import com.project.blog.dto.ResponseDto;
 import com.project.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class UserController {
+public class UserApiController {
 
     @Autowired // DI
     public UserRepository userRepository;
 
     @Autowired // DI
     private UserService userService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @PostMapping("/auth/joinProc")
     public ResponseDto<Integer> join(@RequestBody UserEntity user){ //name, password
@@ -55,17 +66,16 @@ public class UserController {
     }
 
     @Transactional
-    @PutMapping("/user/update/{id}")
-    public UserEntity updateUser(@PathVariable Integer id, @RequestBody UserEntity requestUser){
-        // update 할 때는 save() 사용 안함 => 더티 체킹
-        UserEntity user = userRepository.findById(id).orElseThrow(()->{
-            return new IllegalArgumentException("수정 실패");
-        });
+    @PutMapping("/user/update")
+    public ResponseDto<Integer> updateUser(@RequestBody UserEntity user){
+        userService.정보수정(user);
 
-        user.setUsername(requestUser.getUsername());
-        user.setPassword(requestUser.getPassword());
+        // 세션 등록
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return null;
+        return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 
     @DeleteMapping("/user/delete/{id}")

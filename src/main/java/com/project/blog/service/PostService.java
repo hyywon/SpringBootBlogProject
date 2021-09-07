@@ -6,15 +6,9 @@ import com.project.blog.domain.user.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
-import javax.swing.text.html.Option;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PostService {

@@ -35,7 +35,6 @@ public class PostController {
         return "index";
     }
 
-
     // USER 권한 필요
     @GetMapping("/post/saveForm")
     public String saveForm(){

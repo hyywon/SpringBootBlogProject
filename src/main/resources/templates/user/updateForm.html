@@ -1,0 +1,29 @@
+<!doctype html>
+<html xmlns:th="http://tyhmeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/css/signin.css" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+    <main class="form-signin">
+        <form>
+            <h1 class="h3 mb-3 fw-normal">정보 수정</h1>
+
+            <div class="form-floating">
+                <input th:value="${#authentication.principal.user.id}" id="id" type="hidden">
+                <input th:value="${#authentication.name}" type="text" name="username" class="form-control" id="username" placeholder="username" >
+                <label for="username">UserName</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                <label for="password">Password</label>
+            </div>
+        </form>
+        <button id="btn-update" class="w-100 btn btn-lg btn-primary">수정 완료</button>
+        <p class="mt-5 mb-3 text-muted">&copy; Ylog</p>
+        <script src="/js/user/user.js"></script>
+    </main>
+</html>

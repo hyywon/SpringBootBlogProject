@@ -1,6 +1,7 @@
 package com.project.blog.config.auth;
 
 import com.project.blog.domain.user.UserEntity;
+import lombok.Data;
 import lombok.Getter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,7 +14,7 @@ import java.util.Collection;
 // Spring Security 의 고유한 세션 저장소에 저장 -> PrincipalDetail
 // Overriding 필요
 
-@Getter
+@Data
 public class PrincipalDetail implements UserDetails {
 
     private UserEntity user; // Composition

@@ -2,6 +2,9 @@ let index = {
     init: function () {
         $("#btn-save").on("click", () => { //()=> : this 를 binding 하기 위해서 사용
             this.save();
+        }),
+        $("#btn-update").on("click", () => { //()=> : this 를 binding 하기 위해서 사용
+            this.update();
         });
     },
     save: function () {
@@ -27,7 +30,30 @@ let index = {
                 alert(JSON.stringify(error));
         });
     },
+    update: function () {
+        let data = {
+            id: $("#id").val(),
+            username: $("#username").val(),
+            password: $("#password").val()
+        }
+        console.log(id);
 
+        $.ajax({
+            // 회원가입 수행 요청
+            type: "PUT",
+            url: "/user/update/",
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
+        }).done(function (resp) {
+            console.log(resp);
+            alert("회원정보 수정 완료");
+            location.href = "/";
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+            console.log(JSON.stringify(error));
+        });
+    }
 }
 
 
