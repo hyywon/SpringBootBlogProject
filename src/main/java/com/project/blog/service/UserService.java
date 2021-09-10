@@ -5,11 +5,6 @@ import com.project.blog.domain.user.UserEntity;
 import com.project.blog.domain.user.UserRepository;
 import com.project.blog.dto.ResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +23,18 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
+    @Transactional(readOnly = true)
+    public UserEntity 회원찾기(String username){
+        System.out.println("회원 찾기");
+
+        UserEntity user = userRepository.findByUsername(username).orElseGet(()->{
+            return null;
+        });
+        System.out.println("회원 찾기 success");
+
+        return user;
+    }
+
     @Transactional
     public void 회원가입(UserEntity user) {
 
@@ -37,6 +44,7 @@ public class UserService {
         user.setPassword(encPassword);
 
         userRepository.save(user);
+        System.out.println("회원가입 success");
     }
 
     @Transactional
