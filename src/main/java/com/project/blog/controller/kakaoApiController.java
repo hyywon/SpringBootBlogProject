@@ -119,10 +119,7 @@ public class kakaoApiController {
 
         System.out.println(tempPassword);
 
-        UserEntity kakaoUser = UserEntity.builder()
-                .username(kakaoProfile.getProperties().getNickname())
-                .password(cred_key)
-                .build();
+        UserEntity kakaoUser = new UserEntity(kakaoProfile.getProperties().getNickname(), cred_key);
 
         UserEntity originUser = userService.회원찾기(kakaoUser.getUsername());
 

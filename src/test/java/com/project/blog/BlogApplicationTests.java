@@ -47,11 +47,5 @@ class BlogApplicationTests {
 		userRepository.save(user);
 	}
 
-	@Test
-	@Transactional
-	public void commentTest() throws Exception{
-		// comment 생성
-		CommentEntity comment = new CommentEntity("testComment");
-		commentRepository.save(comment);
-	}
+
 }

@@ -1,5 +1,6 @@
 package com.project.blog.domain.post;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.blog.domain.comment.CommentEntity;
 import com.project.blog.domain.user.UserEntity;
 import lombok.*;
@@ -35,6 +36,10 @@ public class PostEntity{
     private UserEntity user;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "post") // 연관관계의 주인 X
+    @OrderBy("id desc")
+    @JsonIgnoreProperties({"post","user"})
+    // json parsing 하면 comment 에서 무한참조가 되므로 postEntity 에서 JsonIgnore 를 사용해줌
+    // PostEntity 서만 무한참조 안하도록 설정
     private List<CommentEntity> comment;
 
     @CreationTimestamp //시간 자동 입력
