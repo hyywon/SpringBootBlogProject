@@ -23,20 +23,20 @@ public class CommentService {
 
     @Transactional
     public void 댓글작성(CommentSaveDto commentSaveDto){
-        System.out.println("댓글작성 진입 완료");
+        System.out.println("2");
+        commentRepository.commentSave(commentSaveDto.getPostId(), commentSaveDto.getText(), commentSaveDto.getUserId());
+        System.out.println("3");
 
-        UserEntity user = userRepository.findById(commentSaveDto.getUserId()).orElseThrow(() -> {
-            return new IllegalArgumentException("User 없음");
-        });
-
-        PostEntity post = postRepository.findById(commentSaveDto.getPostId()).orElseThrow(() -> {
-            return new IllegalArgumentException("Post 없음");
-        });
-
-        System.out.println(commentSaveDto.getText());
-        CommentEntity comment = CommentEntity.builder().post(post).user(user).text(commentSaveDto.getText()).build();
-        System.out.println("build success");
-
-        commentRepository.save(comment);
+        // DTO 사용
+//        UserEntity user = userRepository.findById(commentSaveDto.getUserId()).orElseThrow(() -> {
+//            return new IllegalArgumentException("User 없음");
+//        });
+//        PostEntity post = postRepository.findById(commentSaveDto.getPostId()).orElseThrow(() -> {
+//            return new IllegalArgumentException("Post 없음");
+//        });
+//        System.out.println(commentSaveDto.getText());
+//        CommentEntity comment = CommentEntity.builder().post(post).user(user).text(commentSaveDto.getText()).build();
+//        System.out.println("build success");
+//        commentRepository.save(comment);
     }
 }

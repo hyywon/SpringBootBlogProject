@@ -30,9 +30,9 @@ public class PostApiController {
 
     @PostMapping("/post/{postId}/reply")
     public ResponseDto<Integer> commentSave(@RequestBody CommentSaveDto commentSaveDto){
-
+        System.out.println("1");
         commentService.댓글작성(commentSaveDto);
-
+        System.out.println("4");
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 

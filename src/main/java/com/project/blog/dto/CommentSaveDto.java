@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentSaveDto {
-    private Integer userId;
     private Integer postId;
     private String text;
+    private Integer userId;
 }

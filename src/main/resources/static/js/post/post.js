@@ -83,8 +83,8 @@ let index = {
     commentSave: function () {
 
         let data = {
-            text: $("#commentText").val(),
             postId: $("#postId").val(),
+            text: $("#commentText").val(),
             userId: $("#userId").val()
         }
         console.log(data);

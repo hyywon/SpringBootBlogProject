@@ -35,7 +35,8 @@ public class PostEntity{
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "post") // 연관관계의 주인 X
+    // cascadetype.remove : board 데이터를 삭제할 때 comment 도 함께 삭제
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "post", cascade = CascadeType.REMOVE) // 연관관계의 주인 X
     @OrderBy("id desc")
     @JsonIgnoreProperties({"post","user"})
     // json parsing 하면 comment 에서 무한참조가 되므로 postEntity 에서 JsonIgnore 를 사용해줌
