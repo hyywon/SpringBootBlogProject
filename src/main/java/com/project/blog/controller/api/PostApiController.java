@@ -30,9 +30,7 @@ public class PostApiController {
 
     @PostMapping("/post/{postId}/reply")
     public ResponseDto<Integer> commentSave(@RequestBody CommentSaveDto commentSaveDto){
-        System.out.println("1");
         commentService.댓글작성(commentSaveDto);
-        System.out.println("4");
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
@@ -48,4 +46,12 @@ public class PostApiController {
         postService.수정하기(post, id);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     };
+
+    @DeleteMapping("/post/delete/{postId}/comment/{commentId}")
+    public ResponseDto<Integer> commentDelete(@PathVariable Integer commentId ){
+        commentService.삭제하기(commentId);
+
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+
+    }
 }

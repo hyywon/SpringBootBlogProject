@@ -22,10 +22,15 @@ public class CommentService {
     private UserRepository userRepository;
 
     @Transactional
+    public void 삭제하기(Integer commentId ){
+        commentRepository.deleteById(commentId);
+
+    }
+
+
+    @Transactional
     public void 댓글작성(CommentSaveDto commentSaveDto){
-        System.out.println("2");
         commentRepository.commentSave(commentSaveDto.getPostId(), commentSaveDto.getText(), commentSaveDto.getUserId());
-        System.out.println("3");
 
         // DTO 사용
 //        UserEntity user = userRepository.findById(commentSaveDto.getUserId()).orElseThrow(() -> {

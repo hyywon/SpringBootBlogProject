@@ -104,6 +104,24 @@ let index = {
             alert(JSON.stringify(error));
         });
     },
+    commentDelete:function (postId, commentId) {
+        alert(commentId);
+
+        $.ajax({
+            // 회원가입 수행 요청
+            type:"DELETE",
+            url:"/post/delete/"+postId+"/comment/"+commentId,
+            dataType: "json",
+        }).done(function(resp){
+            console.log(commentId);
+            console.log(resp);
+            alert("글 삭제 완료");
+            location.href = "/post/"+postId;
+        }).fail(function(error){
+            console.log(JSON.stringify(error));
+            alert(JSON.stringify(error));
+        });
+    },
 
 }
 

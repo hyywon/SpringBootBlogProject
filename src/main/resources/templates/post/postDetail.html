@@ -49,12 +49,15 @@
         <div class="card">
           <div class="card-header">댓글 목록</div>
           <div th:each="comments : ${post.comment}"class="col-md-12">
-          <ul id="comment-box" class="list-group">
-            <li id="commentList" class="list-group-item d-flex justify-content-between">
+            <input id="commentId" type="hidden" th:value="${comments.id}"/>
+            <ul id="comment-box" class="list-group">
+            <li id="comment-${comments.id}" class="list-group-item d-flex justify-content-between">
               <div th:text="${comments.text}"></div>
               <div class="d-flex">
-                <div class="font-italic" th:text="'작성자 : '+ ${comments.user.username} + '&nbsp;&nbsp;' "></div>
-                <button class="badge btn-danger">삭제</button>
+                <div class="font-italic" id="commentUserId" th:text="'작성자 : '+ ${comments.user.username} + '&nbsp;&nbsp;' "></div>
+                <span th:if="${comments.user.username == principal.name}">
+                <button th:onClick="javascript:index.commentDelete([[${post.id}]] , [[${comments.id}]]);" class="badge btn-danger">삭제</button>
+                </span>
               </div>
             </li>
           </ul>
